@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SILVER SKETCH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #080808;
+      --dark: #111111;
+      --card: #161616;
+      --border: #2a2a2a;
+      --silver: #c0c0c0;
+      --silver-light: #e8e8e8;
+      --silver-dim: #888888;
+      --accent: #7eb8d4;
+      --white: #f5f5f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.97), transparent);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 6px;
+      color: var(--silver-light);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--silver-light); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'SILVER SKETCH';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 20vw, 260px);
+      color: rgba(255,255,255,0.02);
+      letter-spacing: 20px;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .hero-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 12vw, 140px);
+      letter-spacing: 12px;
+      line-height: 0.9;
+      color: var(--silver-light);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--silver-dim);
+      letter-spacing: 2px;
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      background: var(--silver-light);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+    .btn-secondary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--silver-dim);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover { border-color: var(--silver-dim); color: var(--silver-light); transform: translateY(-2px); }
+
+    /* SECTION COMMON */
+    section { padding: 100px 60px; }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      letter-spacing: 6px;
+      color: var(--silver-light);
+      margin-bottom: 60px;
+    }
+
+    /* GALLERY */
+    #gallery { background: var(--black); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .artwork-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+
+    .artwork-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: grayscale(20%);
+    }
+
+    .artwork-card:hover img {
+      transform: scale(1.06);
+      filter: grayscale(0%);
+    }
+
+    .artwork-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+    }
+
+    .artwork-card:hover .artwork-overlay { opacity: 1; }
+
+    .artwork-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--silver-light);
+      margin-bottom: 6px;
+    }
+
+    .artwork-medium {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      margin-bottom: 16px;
+    }
+
+    .artwork-buy-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      background: var(--silver-light);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      width: fit-content;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .artwork-buy-btn:hover { background: var(--accent); }
+
+    /* ADD ARTWORK PLACEHOLDER */
+    .add-artwork-card {
+      aspect-ratio: 3/4;
+      background: var(--card);
+      border: 2px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      gap: 12px;
+    }
+
+    .add-artwork-card:hover { border-color: var(--silver-dim); }
+
+    .add-artwork-card span:first-child {
+      font-size: 40px;
+      color: var(--border);
+    }
+
+    .add-artwork-card span:last-child {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--border);
+    }
+
+    /* SHOP / PRINTS */
+    #shop { background: var(--dark); }
+
+    .prints-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 900px;
+    }
+
+    .print-card {
+      background: var(--card);
+      padding: 40px 32px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .print-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .print-card:hover { border-color: var(--silver-dim); transform: translateY(-4px); }
+    .print-card:hover::before { transform: scaleX(1); }
+
+    .print-size {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 4px;
+      color: var(--silver-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .print-dims {
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--silver-dim);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .print-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .print-note {
+      font-size: 11px;
+      color: var(--silver-dim);
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .print-order-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--silver-light);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+
+    .print-order-btn:hover { background: var(--silver-light); color: var(--black); }
+
+    /* ABOUT */
+    #about {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--silver-dim);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .about-text p strong { color: var(--silver-light); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: 4px;
+      color: var(--silver-light);
+      line-height: 1;
+    }
+
+    .stat-number span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      margin-top: 4px;
+    }
+
+    .about-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-big-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 12vw, 160px);
+      letter-spacing: 10px;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--dark);
+      text-align: center;
+    }
+
+    #contact .section-title { margin-bottom: 20px; }
+
+    .contact-sub {
+      font-size: 14px;
+      color: var(--silver-dim);
+      letter-spacing: 2px;
+      margin-bottom: 60px;
+      font-weight: 300;
+    }
+
+    .contact-options {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px 48px;
+      text-align: left;
+      min-width: 240px;
+      transition: border-color 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+
+    .contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .contact-card-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      margin-bottom: 12px;
+    }
+
+    .contact-card-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--silver-light);
+      font-weight: 600;
+    }
+
+    /* ORDER MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      max-width: 520px;
+      width: 100%;
+      padding: 52px;
+      position: relative;
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: none;
+      color: var(--silver-dim);
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--silver-light); }
+
+    .modal-label {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 4px;
+      color: var(--silver-light);
+      margin-bottom: 32px;
+    }
+
+    .modal-artwork-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--silver-dim);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 16px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group select option { background: var(--dark); }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .modal-price-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      margin: 24px 0;
+    }
+
+    .modal-note {
+      font-size: 12px;
+      color: var(--silver-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      padding: 16px;
+      border-left: 2px solid var(--accent);
+      background: rgba(126,184,212,0.04);
+    }
+
+    .modal-submit {
+      width: 100%;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 18px;
+      background: var(--silver-light);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    .modal-submit:hover { background: var(--accent); }
+
+    /* EDIT PANEL */
+    .edit-panel {
+      position: fixed;
+      top: 50%; right: -360px;
+      transform: translateY(-50%);
+      width: 340px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-right: none;
+      z-index: 1500;
+      transition: right 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .edit-panel.open { right: 0; }
+
+    .edit-toggle {
+      position: absolute;
+      left: -44px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--silver-dim);
+      padding: 14px 12px;
+      cursor: pointer;
+      font-size: 18px;
+      writing-mode: vertical-rl;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .edit-toggle:hover { color: var(--silver-light); }
+
+    .edit-panel-inner { padding: 32px 28px; }
+
+    .edit-panel-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--silver-light);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edit-artwork-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 0;
+    }
+
+    .edit-artwork-item input {
+      width: 100%;
+      background: var(--black);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 8px 10px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+
+    .edit-artwork-item input:focus { border-color: var(--accent); }
+
+    .edit-artwork-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      margin-bottom: 4px;
+    }
+
+    .edit-save-btn {
+      width: 100%;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 12px;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .edit-save-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 5px;
+      color: var(--silver-dim);
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--silver-dim);
+      opacity: 0.5;
+    }
+
+    /* DIVIDER LINE */
+    .line-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 60px;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--silver-dim); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #about { grid-template-columns: 1fr; gap: 40px; }
+      .prints-grid { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+      .line-divider { margin: 0 24px; }
+      .modal { padding: 32px 24px; }
+    }
+
+    /* FADE IN ANIMATION */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="nav-logo">SILVER<span>SKETCH</span></a>
+    <ul class="nav-links">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#shop">Prints</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">Hand Drawn Art — Self Taught — Tamil Nadu, India</p>
+    <h1>SILVER<br><span>SKETCH</span></h1>
+    <p>Realistic pencil and ink artworks of machines, power, and raw detail. Every line drawn by hand.</p>
+    <div class="hero-btns">
+      <a href="#gallery" class="btn-primary">View Gallery</a>
+      <a href="#shop" class="btn-secondary">Buy Prints</a>
+    </div>
+  </section>
+
+  <div class="line-divider"></div>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <p class="section-label fade-in">— Original Works</p>
+    <h2 class="section-title fade-in">GALLERY</h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Artworks rendered by JS -->
+    </div>
+  </section>
+
+  <div class="line-divider"></div>
+
+  <!-- SHOP -->
+  <section id="shop">
+    <p class="section-label fade-in">— Limited Edition</p>
+    <h2 class="section-title fade-in">PRINTS</h2>
+    <div class="prints-grid fade-in">
+      <div class="print-card">
+        <div class="print-size">A4</div>
+        <div class="print-dims">210 × 297 mm</div>
+        <div class="print-price">₹300</div>
+        <div class="print-note">Signed & numbered.<br>Limited to 50 prints per artwork.</div>
+        <button class="print-order-btn" onclick="openOrderModal('', 'A4', 300)">Order Print</button>
+      </div>
+      <div class="print-card">
+        <div class="print-size">A3</div>
+        <div class="print-dims">297 × 420 mm</div>
+        <div class="print-price">₹500</div>
+        <div class="print-note">Signed & numbered.<br>Limited to 50 prints per artwork.</div>
+        <button class="print-order-btn" onclick="openOrderModal('', 'A3', 500)">Order Print</button>
+      </div>
+      <div class="print-card">
+        <div class="print-size">A2</div>
+        <div class="print-dims">420 × 594 mm</div>
+        <div class="print-price">₹800</div>
+        <div class="print-note">Signed & numbered.<br>Limited to 50 prints per artwork.</div>
+        <button class="print-order-btn" onclick="openOrderModal('', 'A2', 800)">Order Print</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="line-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-text fade-in">
+      <p class="section-label">— The Artist</p>
+      <h2 class="section-title" style="margin-bottom:32px;">WHO I AM</h2>
+      <p>I am <strong>Silver Sketch</strong> — a self-taught artist from Tamil Nadu, India. No classes. No formal training. Just a pencil, paper, and years of obsession with detail.</p>
+      <p>I draw what I love — <strong>supercars, superbikes, machines, and powerful subjects.</strong> Every artwork is done entirely by hand, from reference to finished piece.</p>
+      <p>Currently studying Civil Engineering at <strong>VIT Vellore</strong> while building this art journey one drawing at a time.</p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">5<span>+</span></div>
+          <div class="stat-label">Artworks</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0<span></span></div>
+          <div class="stat-label">Classes Taken</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">400<span>+</span></div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Hours Practiced</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual fade-in">
+      <div class="about-big-text">DRAW<br>EVERY<br>DAY</div>
+    </div>
+  </section>
+
+  <div class="line-divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label fade-in">— Get In Touch</p>
+    <h2 class="section-title fade-in">ORDER / CONTACT</h2>
+    <p class="contact-sub fade-in">DM on Instagram to order prints or originals. Payment via UPI.</p>
+    <div class="contact-options fade-in">
+      <a href="https://instagram.com/silver_sketchh" target="_blank" class="contact-card">
+        <div class="contact-card-label">Instagram</div>
+        <div class="contact-card-value">@silver_sketchh</div>
+      </a>
+      <div class="contact-card" style="cursor:default;">
+        <div class="contact-card-label">Payment</div>
+        <div class="contact-card-value">UPI / Bank Transfer</div>
+      </div>
+      <div class="contact-card" style="cursor:default;">
+        <div class="contact-card-label">Shipping</div>
+        <div class="contact-card-value">All India Delivery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">SILVER<span>SKETCH</span></div>
+    <div class="footer-copy">© 2025 Silver Sketch. All artworks hand drawn. All rights reserved.</div>
+  </footer>
+
+  <!-- ORDER MODAL -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-label">— Place Your Order</div>
+      <div class="modal-title">ORDER PRINT</div>
+      <div class="modal-artwork-name" id="modalArtworkName">Select Artwork</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="orderName" placeholder="Enter your name" />
+      </div>
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="text" id="orderPhone" placeholder="Enter your number" />
+      </div>
+      <div class="form-group">
+        <label>Artwork</label>
+        <select id="orderArtwork" onchange="updatePrice()">
+          <!-- Populated by JS -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Print Size</label>
+        <select id="orderSize" onchange="updatePrice()">
+          <option value="A4" data-price="300">A4 — ₹300</option>
+          <option value="A3" data-price="500">A3 — ₹500</option>
+          <option value="A2" data-price="800">A2 — ₹800</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Delivery Address</label>
+        <textarea id="orderAddress" placeholder="Enter your full delivery address"></textarea>
+      </div>
+      <div class="modal-price-display" id="modalPrice">₹500</div>
+      <div class="modal-note">
+        After submitting, DM me on Instagram <strong>@silver_sketchh</strong> with your name to confirm. Payment via UPI after confirmation.
+      </div>
+      <button class="modal-submit" onclick="submitOrder()">Confirm Order via WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- EDIT PANEL -->
+  <div class="edit-panel" id="editPanel">
+    <button class="edit-toggle" onclick="toggleEditPanel()">✦ EDIT</button>
+    <div class="edit-panel-inner">
+      <div class="edit-panel-title">EDIT ARTWORKS</div>
+      <div id="editArtworkList"></div>
+      <button class="edit-save-btn" onclick="saveArtworks()">Save Changes</button>
+    </div>
+  </div>
+
+  <script>
+    // ─── ARTWORK DATA ───────────────────────────────────────────────
+    // To add a new artwork: add an object to this array
+    // imagePath: put your image file in the same folder as index.html
+    // and type the filename here e.g. "bmw.jpg"
+    let artworks = JSON.parse(localStorage.getItem('ss_artworks')) || [
+      { id: 1, title: "BMW M8", medium: "Ballpoint Pen & Color", imagePath: "bmw_m8.jpg" },
+      { id: 2, title: "Silver Surfer", medium: "Pen on Black Paper", imagePath: "silver_surfer.jpg" },
+      { id: 3, title: "Ferrari LaFerrari", medium: "Ballpoint Pen & Color", imagePath: "ferrari.jpg" },
+      { id: 4, title: "Revolver", medium: "Pencil on Paper", imagePath: "revolver.jpg" },
+      { id: 5, title: "Snake", medium: "Pencil on Paper", imagePath: "snake.jpg" },
+    ];
+
+    // ─── RENDER GALLERY ─────────────────────────────────────────────
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      grid.innerHTML = '';
+      artworks.forEach(art => {
+        const card = document.createElement('div');
+        card.className = 'artwork-card';
+        card.innerHTML = `
+          <img src="${art.imagePath}" alt="${art.title}" onerror="this.style.display='none'; this.parentElement.style.background='#1a1a1a'"/>
+          <div class="artwork-overlay">
+            <div class="artwork-title">${art.title}</div>
+            <div class="artwork-medium">${art.medium}</div>
+            <button class="artwork-buy-btn" onclick="openOrderModal('${art.title}', 'A3', 500)">Buy Print</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Add artwork button
+      const addCard = document.createElement('div');
+      addCard.className = 'add-artwork-card';
+      addCard.innerHTML = `<span>+</span><span>Add Artwork</span>`;
+      addCard.onclick = () => toggleEditPanel();
+      grid.appendChild(addCard);
+
+      renderEditPanel();
+      populateArtworkSelect();
+    }
+
+    // ─── EDIT PANEL ─────────────────────────────────────────────────
+    function renderEditPanel() {
+      const list = document.getElementById('editArtworkList');
+      list.innerHTML = '';
+      artworks.forEach((art, i) => {
+        const item = document.createElement('div');
+        item.className = 'edit-artwork-item';
+        item.innerHTML = `
+          <div class="edit-artwork-label">Title</div>
+          <input type="text" value="${art.title}" onchange="artworks[${i}].title=this.value" />
+          <div class="edit-artwork-label">Medium</div>
+          <input type="text" value="${art.medium}" onchange="artworks[${i}].medium=this.value" />
+          <div class="edit-artwork-label">Image Filename (e.g. myart.jpg)</div>
+          <input type="text" value="${art.imagePath}" onchange="artworks[${i}].imagePath=this.value" />
+        `;
+        list.appendChild(item);
+      });
+
+      // Add new artwork button inside edit panel
+      const addBtn = document.createElement('button');
+      addBtn.className = 'print-order-btn';
+      addBtn.style.marginTop = '12px';
+      addBtn.textContent = '+ Add New Artwork';
+      addBtn.onclick = () => {
+        artworks.push({ id: Date.now(), title: "New Artwork", medium: "Medium", imagePath: "image.jpg" });
+        renderEditPanel();
+      };
+      list.appendChild(addBtn);
+    }
+
+    function toggleEditPanel() {
+      document.getElementById('editPanel').classList.toggle('open');
+    }
+
+    function saveArtworks() {
+      localStorage.setItem('ss_artworks', JSON.stringify(artworks));
+      renderGallery();
+      document.getElementById('editPanel').classList.remove('open');
+      alert('Artworks saved successfully!');
+    }
+
+    // ─── ORDER MODAL ─────────────────────────────────────────────────
+    function populateArtworkSelect() {
+      const sel = document.getElementById('orderArtwork');
+      sel.innerHTML = artworks.map(a => `<option value="${a.title}">${a.title}</option>`).join('');
+    }
+
+    function openOrderModal(artworkName, size, price) {
+      document.getElementById('orderModal').classList.add('active');
+      document.getElementById('modalArtworkName').textContent = artworkName || 'Choose below';
+      if (artworkName) {
+        const sel = document.getElementById('orderArtwork');
+        for (let opt of sel.options) { if (opt.value === artworkName) opt.selected = true; }
+      }
+      const sizeSel = document.getElementById('orderSize');
+      for (let opt of sizeSel.options) { if (opt.value === size) opt.selected = true; }
+      document.getElementById('modalPrice').textContent = '₹' + price;
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').classList.remove('active');
+    }
+
+    function updatePrice() {
+      const sel = document.getElementById('orderSize');
+      const price = sel.options[sel.selectedIndex].getAttribute('data-price');
+      document.getElementById('modalPrice').textContent = '₹' + price;
+    }
+
+    function submitOrder() {
+      const name = document.getElementById('orderName').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+      const artwork = document.getElementById('orderArtwork').value;
+      const size = document.getElementById('orderSize').value;
+      const price = document.getElementById('modalPrice').textContent;
+      const address = document.getElementById('orderAddress').value.trim();
+
+      if (!name || !phone || !address) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const msg = `Hello Silver Sketch! I want to order a print.%0A%0AName: ${name}%0APhone: ${phone}%0AArtwork: ${artwork}%0ASize: ${size}%0APrice: ${price}%0AAddress: ${address}`;
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
+      closeModal();
+    }
+
+    // Close modal on overlay click
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // ─── FADE IN ON SCROLL ───────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── INIT ────────────────────────────────────────────────────────
+    renderGallery();
+  </script>
+</body>
+</html>
