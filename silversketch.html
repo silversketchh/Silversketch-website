@@ -1063,6 +1063,21 @@ async function loadArtworks() {
       }
     }
 
+    // Secret key combination to open edit panel
+    // Press S + K + E + T + C + H together won't work
+    // Instead type these keys one after another quickly: s-k-e-t-c-h
+    let keySequence = [];
+    const secretCode = ['s','k','e','t','c','h'];
+
+    document.addEventListener('keydown', function(e) {
+      keySequence.push(e.key.toLowerCase());
+      keySequence = keySequence.slice(-6);
+      if (keySequence.join('') === secretCode.join('')) {
+        toggleEditPanel();
+        keySequence = [];
+      }
+    });
+
     function saveArtworks() {
       localStorage.setItem('ss_artworks', JSON.stringify(artworks));
       renderGallery();
