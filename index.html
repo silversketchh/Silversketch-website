@@ -14,7 +14,7 @@
       --silver: #c0c0c0;
       --silver-light: #e8e8e8;
       --silver-dim: #888888;
-      --accent: #7eb8d4;
+      --accent: #f5f5f5;
       --white: #f5f5f5;
     }
 
@@ -22,12 +22,66 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--black);
+      background: url('1.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: var(--white);
       font-family: 'Barlow', sans-serif;
       cursor: crosshair;
       overflow-x: hidden;
+      position: relative;
     }
+
+    #meteors {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .meteor {
+      position: absolute;
+      width: 1px;
+      height: 80px;
+      border-radius: 0;
+      transform: rotate(45deg);
+    }
+
+    .meteor::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px white, 0 0 16px white;
+    }
+
+    .meteor1 { top: 10%; left: 10%; }
+    .meteor2 { top: 20%; left: 60%; }
+    .meteor3 { top: 40%; left: 20%; }
+    .meteor4 { top: 60%; left: 70%; }
+    .meteor5 { top: 80%; left: 30%; }
+    .meteor6 { top: 15%; left: 80%; }
+    .meteor7 { top: 50%; left: 40%; }
+    .meteor8 { top: 70%; left: 10%; }
+    .meteor9 { top: 30%; left: 90%; }
+    .meteor10 { top: 90%; left: 50%; }
+    .meteor11 { top: 25%; left: 5%; }
+    .meteor12 { top: 45%; left: 85%; }
+    .meteor13 { top: 65%; left: 25%; }
+    .meteor14 { top: 85%; left: 60%; }
+    .meteor15 { top: 5%; left: 45%; }
+    .meteor16 { top: 75%; left: 75%; }
+    .meteor17 { top: 85%; left: 80%; }
+    .meteor18 { top: 95%; left: 85%; }
+    .meteor19 { top: 80%; left: 90%; }
+    .meteor20 { top: 90%; left: 95%; }
+
+
 
     /* NAVBAR */
     nav {
@@ -46,11 +100,19 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 28px;
       letter-spacing: 6px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .nav-logo span {
+      background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .nav-links { display: flex; gap: 36px; list-style: none; }
 
@@ -65,6 +127,17 @@
     }
 
     .nav-links a:hover { color: var(--silver-light); }
+
+    .logo-object {
+      display: inline-block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .logo-nav { height: 100px; }
+    .logo-hero { height: 220px; }
+    .logo-footer { height: 70px; }
 
     /* HERO */
     .hero {
@@ -105,11 +178,19 @@
       font-size: clamp(60px, 12vw, 140px);
       letter-spacing: 12px;
       line-height: 0.9;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 24px;
     }
 
-    .hero h1 span { color: var(--accent); }
+    .hero h1 span {
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .hero p {
       font-size: 15px;
@@ -172,7 +253,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(36px, 6vw, 72px);
       letter-spacing: 6px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 60px;
     }
 
@@ -224,7 +308,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
       letter-spacing: 4px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 6px;
     }
 
@@ -318,7 +405,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 48px;
       letter-spacing: 4px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       line-height: 1;
       margin-bottom: 8px;
     }
@@ -396,11 +486,19 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 52px;
       letter-spacing: 4px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       line-height: 1;
     }
 
-    .stat-number span { color: var(--accent); }
+    .stat-number span {
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .stat-label {
       font-size: 11px;
@@ -535,7 +633,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 36px;
       letter-spacing: 4px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 32px;
     }
 
@@ -586,7 +687,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 42px;
       letter-spacing: 4px;
-      color: var(--accent);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin: 24px 0;
     }
 
@@ -661,7 +765,10 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
       letter-spacing: 4px;
-      color: var(--silver-light);
+      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 24px;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
@@ -731,10 +838,18 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       letter-spacing: 5px;
-      color: var(--silver-dim);
+      background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .footer-logo span { color: var(--accent); }
+    .footer-logo span {
+      background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .footer-copy {
       font-size: 11px;
@@ -779,9 +894,32 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="#" class="nav-logo">SILVER<span>SKETCH</span></a>
+  <div id="meteors">
+    <div class="meteor meteor1"></div>
+    <div class="meteor meteor2"></div>
+    <div class="meteor meteor3"></div>
+    <div class="meteor meteor4"></div>
+    <div class="meteor meteor5"></div>
+    <div class="meteor meteor6"></div>
+    <div class="meteor meteor7"></div>
+    <div class="meteor meteor8"></div>
+    <div class="meteor meteor9"></div>
+    <div class="meteor meteor10"></div>
+    <div class="meteor meteor11"></div>
+    <div class="meteor meteor12"></div>
+    <div class="meteor meteor13"></div>
+    <div class="meteor meteor14"></div>
+    <div class="meteor meteor15"></div>
+    <div class="meteor meteor16"></div>
+    <div class="meteor meteor17"></div>
+    <div class="meteor meteor18"></div>
+    <div class="meteor meteor19"></div>
+    <div class="meteor meteor20"></div>
+  </div>
+    <a href="#" class="nav-logo">
+      <img src="roundlogo-1.png" alt="Silver Sketch Logo" class="logo-object logo-nav" style="vertical-align:middle; margin-right:10px;">
+      SILVER<span>SKETCH</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#shop">Prints</a></li>
@@ -792,6 +930,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <img src="roundlogo-1.png" alt="Silver Sketch" class="logo-object logo-hero" style="margin-bottom:28px;">
     <p class="hero-tag">Hand Drawn Art — Self Taught — Tamil Nadu, India</p>
     <h1>SILVER<br><span>SKETCH</span></h1>
     <p>Realistic pencil and ink artworks of machines, power, and raw detail. Every line drawn by hand.</p>
@@ -855,7 +994,7 @@
       <p>Currently studying Civil Engineering at <strong>VIT Vellore</strong> while building this art journey one drawing at a time.</p>
       <div class="about-stats">
         <div class="stat-item">
-          <div class="stat-number">5<span>+</span></div>
+          <div class="stat-number">13<span>+</span></div>
           <div class="stat-label">Artworks</div>
         </div>
         <div class="stat-item">
@@ -902,7 +1041,10 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">SILVER<span>SKETCH</span></div>
+    <div class="footer-logo" style="display:flex; align-items:center; gap:12px;">
+      <img src="roundlogo-1.png" alt="Silver Sketch Logo" class="logo-object logo-footer">
+      SILVER<span>SKETCH</span>
+    </div>
     <div class="footer-copy">© 2025 Silver Sketch. All artworks hand drawn. All rights reserved.</div>
   </footer>
 
@@ -962,7 +1104,21 @@
     // To add a new artwork: add an object to this array
     // imagePath: put your image file in the same folder as index.html
     // and type the filename here e.g. "bmw.jpg"
-    let artworks = [];
+    let artworks = [
+      { id: 1, title: "BMW M8", medium: "Pencil on Paper", imagePath: "bmw_m8.jpeg" },
+      { id: 2, title: "Bugatti Chiron", medium: "Ink Drawing", imagePath: "bugatti.jpeg" },
+      { id: 3, title: "Ferrari", medium: "Realistic Sketch", imagePath: "ferrari.jpg" },
+      { id: 4, title: "Black Horse", medium: "Pencil Art", imagePath: "black_horse.jpeg" },
+      { id: 5, title: "Bruce Lee", medium: "Portrait", imagePath: "brucelee.jpeg" },
+      { id: 6, title: "Horse Tattoo", medium: "Tattoo Design", imagePath: "horse_tattoo.jpeg" },
+      { id: 7, title: "Koi Fish", medium: "Watercolor", imagePath: "koi.jpg" },
+      { id: 8, title: "Lion", medium: "Wildlife Art", imagePath: "lion.jpeg" },
+      { id: 9, title: "Marc Marquez Celeb", medium: "Motorsport", imagePath: "marc_marquez_celeb.jpeg" },
+      { id: 10, title: "Marquez Aura", medium: "Aura Sketch", imagePath: "marquez_aura.jpeg" },
+      { id: 11, title: "Revolver", medium: "Weapon Art", imagePath: "revolver.jpg" },
+      { id: 12, title: "Silver Surfer", medium: "Comic Art", imagePath: "silver_surfer.jpg" },
+      { id: 13, title: "Snake", medium: "Reptile Sketch", imagePath: "snake.jpg" }
+    ];
 
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR4Iw4xkTOEzX5KRGyE2gqRKmCK-PvwTphxjfr3BrZ3skrBo0WbM0k4vWSDyDgvh1uxE67np5hBEJqE/pub?gid=0&single=true&output=csv';
 
@@ -1144,7 +1300,7 @@ async function loadArtworks() {
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // ─── INIT ────────────────────────────────────────────────────────
-    renderGallery();
+    loadArtworks();
   </script>
 </body>
 </html>
