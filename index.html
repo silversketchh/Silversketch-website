@@ -861,13 +861,28 @@ async function loadArtworks() {
     const response = await fetch(SHEET_URL);
     const csv = await response.text();
     const rows = csv.trim().split('\n').slice(1);
-    artworks = rows.map((row, i) => {
-      const cols = row.split(',');
+  artworks = rows.map((row, i) => {
+      // Handle commas inside quoted fields
+      const cols = [];
+      let current = '';
+      let inQuotes = false;
+      for (let char of row) {
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          cols.push(current.trim());
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      cols.push(current.trim());
+      
       return {
         id: i + 1,
-        title: cols[0]?.trim() || '',
-        medium: cols[1]?.trim() || '',
-        imagePath: cols[2]?.trim() || ''
+        title: cols[0]?.replace(/"/g, '').trim() || '',
+        medium: cols[1]?.replace(/"/g, '').trim() || '',
+        imagePath: cols[2]?.replace(/"/g, '').trim() || ''
       };
     });
     renderGallery();
