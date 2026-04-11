@@ -577,14 +577,14 @@
     .modal {
       background: var(--dark);
       border: 1px solid var(--border);
-      max-width: 920px;
-      width: min(92vw, 920px);
+      max-width: 600px;
+      width: min(92vw, 600px);
       padding: 40px;
       position: relative;
       animation: modalIn 0.3s ease;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 32px;
+      grid-template-rows: auto auto auto auto;
+      gap: 24px;
       align-items: start;
       max-height: 85vh;
       overflow-y: auto;
@@ -593,7 +593,7 @@
     .modal-label,
     .modal-title,
     .modal-artwork-name {
-      grid-column: 1 / -1;
+      /* spans full width */
     }
 
     .modal-grid {
@@ -898,10 +898,8 @@
   <section id="about">
     <div class="about-text fade-in">
       <p class="section-label">— The Artist</p>
-      <h2 class="section-title" style="margin-bottom:32px;">WHO I AM</h2>
+      <h2 class="section-title" style="margin-bottom:32px;">WHO AM I</h2>
       <p>I am <strong>Silver Sketch</strong> — a self-taught artist from Tamil Nadu, India. No classes. No formal training. Just a pencil, paper, and years of obsession with detail.</p>
-      <p>I draw what I love — <strong>supercars, superbikes, machines, and powerful subjects.</strong> Every artwork is done entirely by hand, from reference to finished piece.</p>
-      <p>Currently studying Civil Engineering at <strong>VIT Vellore</strong> while building this art journey one drawing at a time.</p>
     </div>
     <div class="about-visual fade-in">
       <div class="about-big-text">DRAW<br>EVERY<br>DAY</div>
@@ -1094,7 +1092,7 @@ async function loadArtworks() {
       }
 
       const msg = `Hello Silver Sketch! I want to order a print.%0A%0AName: ${name}%0APhone: ${phone}%0AArtwork: ${artwork}%0ASize: ${size}%0APrice: ${price}%0AAddress: ${address}`;
-      window.open(`https://wa.me/8754882333?text=${msg}`, '_blank');
+      window.open(`https://wa.me/918754882333?text=${msg}`, '_blank');
       closeModal();
     }
 
