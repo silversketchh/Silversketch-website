@@ -265,8 +265,8 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px 15px;
     }
 
     .artwork-card {
@@ -275,6 +275,12 @@
       background: var(--card);
       aspect-ratio: 3/4;
       cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .artwork-card:hover {
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
     }
 
     .artwork-card img {
@@ -341,33 +347,6 @@
     .artwork-buy-btn:hover { background: var(--accent); }
 
     /* ADD ARTWORK PLACEHOLDER */
-    .add-artwork-card {
-      aspect-ratio: 3/4;
-      background: var(--card);
-      border: 2px dashed var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.3s;
-      gap: 12px;
-    }
-
-    .add-artwork-card:hover { border-color: var(--silver-dim); }
-
-    .add-artwork-card span:first-child {
-      font-size: 40px;
-      color: var(--border);
-    }
-
-    .add-artwork-card span:last-child {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--border);
-    }
 
     /* SHOP / PRINTS */
     #shop { background: var(--dark); }
@@ -590,16 +569,47 @@
       backdrop-filter: blur(8px);
     }
 
-    .modal-overlay.active { display: flex; }
+    .modal-overlay.active { 
+      display: flex; 
+      overflow-y: auto;
+    }
 
     .modal {
       background: var(--dark);
       border: 1px solid var(--border);
-      max-width: 520px;
-      width: 100%;
-      padding: 52px;
+      max-width: 920px;
+      width: min(92vw, 920px);
+      padding: 40px;
       position: relative;
       animation: modalIn 0.3s ease;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 32px;
+      align-items: start;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-label,
+    .modal-title,
+    .modal-artwork-name {
+      grid-column: 1 / -1;
+    }
+
+    .modal-grid {
+      display: contents;
+    }
+
+    .modal-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .modal-sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 18px;
     }
 
     @keyframes modalIn {
@@ -645,7 +655,7 @@
       font-size: 18px;
       letter-spacing: 3px;
       color: var(--silver-dim);
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       text-transform: uppercase;
     }
 
@@ -721,106 +731,6 @@
 
     .modal-submit:hover { background: var(--accent); }
 
-    /* EDIT PANEL */
-    .edit-panel {
-      position: fixed;
-      top: 50%; right: -360px;
-      transform: translateY(-50%);
-      width: 340px;
-      background: var(--dark);
-      border: 1px solid var(--border);
-      border-right: none;
-      z-index: 1500;
-      transition: right 0.4s ease;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    .edit-panel.open { right: 0; }
-
-    .edit-toggle {
-      position: absolute;
-      left: -44px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--dark);
-      border: 1px solid var(--border);
-      border-right: none;
-      color: var(--silver-dim);
-      padding: 14px 12px;
-      cursor: pointer;
-      font-size: 18px;
-      writing-mode: vertical-rl;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .edit-toggle:hover { color: var(--silver-light); }
-
-    .edit-panel-inner { padding: 32px 28px; }
-
-    .edit-panel-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 4px;
-      background: linear-gradient(45deg, #c0c0c0, #e8e8e8, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .edit-artwork-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 16px;
-      margin-bottom: 12px;
-      border-radius: 0;
-    }
-
-    .edit-artwork-item input {
-      width: 100%;
-      background: var(--black);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 8px 10px;
-      font-family: 'Barlow', sans-serif;
-      font-size: 12px;
-      margin-bottom: 8px;
-      outline: none;
-    }
-
-    .edit-artwork-item input:focus { border-color: var(--accent); }
-
-    .edit-artwork-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--silver-dim);
-      margin-bottom: 4px;
-    }
-
-    .edit-save-btn {
-      width: 100%;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 12px;
-      background: var(--accent);
-      color: var(--black);
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      margin-top: 16px;
-      transition: opacity 0.2s;
-    }
-
-    .edit-save-btn:hover { opacity: 0.85; }
 
     /* FOOTER */
     footer {
@@ -992,24 +902,6 @@
       <p>I am <strong>Silver Sketch</strong> — a self-taught artist from Tamil Nadu, India. No classes. No formal training. Just a pencil, paper, and years of obsession with detail.</p>
       <p>I draw what I love — <strong>supercars, superbikes, machines, and powerful subjects.</strong> Every artwork is done entirely by hand, from reference to finished piece.</p>
       <p>Currently studying Civil Engineering at <strong>VIT Vellore</strong> while building this art journey one drawing at a time.</p>
-      <div class="about-stats">
-        <div class="stat-item">
-          <div class="stat-number">13<span>+</span></div>
-          <div class="stat-label">Artworks</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">0<span></span></div>
-          <div class="stat-label">Classes Taken</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">400<span>+</span></div>
-          <div class="stat-label">Followers</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Hours Practiced</div>
-        </div>
-      </div>
     </div>
     <div class="about-visual fade-in">
       <div class="about-big-text">DRAW<br>EVERY<br>DAY</div>
@@ -1055,49 +947,45 @@
       <div class="modal-label">— Place Your Order</div>
       <div class="modal-title">ORDER PRINT</div>
       <div class="modal-artwork-name" id="modalArtworkName">Select Artwork</div>
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" id="orderName" placeholder="Enter your name" />
+      <div class="modal-grid">
+        <div class="modal-form">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="orderName" placeholder="Enter your name" />
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp</label>
+            <input type="text" id="orderPhone" placeholder="Enter your number" />
+          </div>
+          <div class="form-group">
+            <label>Artwork</label>
+            <select id="orderArtwork" onchange="updatePrice()">
+              <!-- Populated by JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Print Size</label>
+            <select id="orderSize" onchange="updatePrice()">
+              <option value="A4" data-price="300">A4 — ₹300</option>
+              <option value="A3" data-price="500">A3 — ₹500</option>
+              <option value="A2" data-price="800">A2 — ₹800</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <textarea id="orderAddress" placeholder="Enter your full delivery address"></textarea>
+          </div>
+        </div>
+        <div class="modal-sidebar">
+          <div class="modal-price-display" id="modalPrice">₹500</div>
+          <div class="modal-note">
+            After submitting, DM me on Instagram <strong>@silver_sketchh</strong> with your name to confirm. Payment via UPI after confirmation.
+          </div>
+          <button class="modal-submit" onclick="submitOrder()">Confirm Order via WhatsApp</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Phone / WhatsApp</label>
-        <input type="text" id="orderPhone" placeholder="Enter your number" />
-      </div>
-      <div class="form-group">
-        <label>Artwork</label>
-        <select id="orderArtwork" onchange="updatePrice()">
-          <!-- Populated by JS -->
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Print Size</label>
-        <select id="orderSize" onchange="updatePrice()">
-          <option value="A4" data-price="300">A4 — ₹300</option>
-          <option value="A3" data-price="500">A3 — ₹500</option>
-          <option value="A2" data-price="800">A2 — ₹800</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Delivery Address</label>
-        <textarea id="orderAddress" placeholder="Enter your full delivery address"></textarea>
-      </div>
-      <div class="modal-price-display" id="modalPrice">₹500</div>
-      <div class="modal-note">
-        After submitting, DM me on Instagram <strong>@silver_sketchh</strong> with your name to confirm. Payment via UPI after confirmation.
-      </div>
-      <button class="modal-submit" onclick="submitOrder()">Confirm Order via WhatsApp</button>
     </div>
   </div>
-
- !-- EDIT PANEL -->
-  <div class="edit-panel" id="editPanel">
-    <button class="edit-toggle" onclick="toggleEditPanel()">✦ EDIT</button>
-    <div class="edit-panel-inner">
-      <div class="edit-panel-title">EDIT ARTWORKS</div>
-      <div id="editArtworkList"></div>
-      <button class="edit-save-btn" onclick="saveArtworks()">Save Changes</button>
-    </div>
-  </div> <
 
   <script>
     // ─── ARTWORK DATA ───────────────────────────────────────────────
@@ -1161,84 +1049,7 @@ async function loadArtworks() {
         grid.appendChild(card);
       });
 
-      // Add artwork button
-      const addCard = document.createElement('div');
-      addCard.className = 'add-artwork-card';
-      addCard.innerHTML = `<span>+</span><span>Add Artwork</span>`;
-      addCard.onclick = () => toggleEditPanel();
-      grid.appendChild(addCard);
-
-      renderEditPanel();
       populateArtworkSelect();
-    }
-
-    // ─── EDIT PANEL ─────────────────────────────────────────────────
-    function renderEditPanel() {
-      const list = document.getElementById('editArtworkList');
-      list.innerHTML = '';
-      artworks.forEach((art, i) => {
-        const item = document.createElement('div');
-        item.className = 'edit-artwork-item';
-        item.innerHTML = `
-          <div class="edit-artwork-label">Title</div>
-          <input type="text" value="${art.title}" onchange="artworks[${i}].title=this.value" />
-          <div class="edit-artwork-label">Medium</div>
-          <input type="text" value="${art.medium}" onchange="artworks[${i}].medium=this.value" />
-          <div class="edit-artwork-label">Image Filename (e.g. myart.jpg)</div>
-          <input type="text" value="${art.imagePath}" onchange="artworks[${i}].imagePath=this.value" />
-        `;
-        list.appendChild(item);
-      });
-
-      // Add new artwork button inside edit panel
-      const addBtn = document.createElement('button');
-      addBtn.className = 'print-order-btn';
-      addBtn.style.marginTop = '12px';
-      addBtn.textContent = '+ Add New Artwork';
-      addBtn.onclick = () => {
-        artworks.push({ id: Date.now(), title: "New Artwork", medium: "Medium", imagePath: "image.jpg" });
-        renderEditPanel();
-      };
-      list.appendChild(addBtn);
-    }
-
-   const ADMIN_PASSWORD = "Srinath@07";
-
-    function toggleEditPanel() {
-      const panel = document.getElementById('editPanel');
-      if (panel.classList.contains('open')) {
-        panel.classList.remove('open');
-        return;
-      }
-      const entered = prompt("Enter admin password to edit artworks:");
-      if (entered === null) return;
-      if (entered === ADMIN_PASSWORD) {
-        panel.classList.add('open');
-      } else {
-        alert("Wrong password. Access denied.");
-      }
-    }
-
-    // Secret key combination to open edit panel
-    // Press S + K + E + T + C + H together won't work
-    // Instead type these keys one after another quickly: s-k-e-t-c-h
-    let keySequence = [];
-    const secretCode = ['s','k','e','t','c','h'];
-
-    document.addEventListener('keydown', function(e) {
-      keySequence.push(e.key.toLowerCase());
-      keySequence = keySequence.slice(-6);
-      if (keySequence.join('') === secretCode.join('')) {
-        toggleEditPanel();
-        keySequence = [];
-      }
-    });
-
-    function saveArtworks() {
-      localStorage.setItem('ss_artworks', JSON.stringify(artworks));
-      renderGallery();
-      document.getElementById('editPanel').classList.remove('open');
-      alert('Artworks saved successfully!');
     }
 
     // ─── ORDER MODAL ─────────────────────────────────────────────────
@@ -1283,7 +1094,7 @@ async function loadArtworks() {
       }
 
       const msg = `Hello Silver Sketch! I want to order a print.%0A%0AName: ${name}%0APhone: ${phone}%0AArtwork: ${artwork}%0ASize: ${size}%0APrice: ${price}%0AAddress: ${address}`;
-      window.open(`https://wa.me/?text=${msg}`, '_blank');
+      window.open(`https://wa.me/8754882333?text=${msg}`, '_blank');
       closeModal();
     }
 
