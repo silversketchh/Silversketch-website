@@ -83,17 +83,19 @@
 
 
 
-    /* NAVBAR */
+/* NAVBAR */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: sticky;
+      top: 60px; left: 0; right: 0;
+      margin-top: 100px;
       z-index: 1000;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 20px 60px;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.97), transparent);
-      backdrop-filter: blur(6px);
+      padding-top: 120px;
+      height: 100px;
+      background: #000000;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
     }
 
     .nav-logo {
@@ -114,20 +116,96 @@
       background-clip: text;
     }
 
-    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links { display: flex; gap: 48px; list-style: none; align-items: center; }
 
     .nav-links a {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
+      font-size: 24px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--silver-dim);
+      color: var(--silver-light);
       text-decoration: none;
       transition: color 0.3s;
     }
 
     .nav-links a:hover { color: var(--silver-light); }
 
+    .nav-actions { display: flex; gap: 48px; align-items: center; }
+
+    .nav-btn-login {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.3s;
+    }
+
+    .nav-btn-login:hover { color: var(--silver-light); }
+
+    .nav-btn-orders {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.3s;
+    }
+
+    .nav-btn-orders:hover { color: var(--silver-light); }    .nav-actions { display: flex; gap: 48px; align-items: center; }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      width: 100%;
+      padding: 0 40px;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+    }
+    .nav-btn-login {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-btn-login:hover { color: var(--silver-light); }
+
+    .nav-btn-orders {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver-light);
+      text-decoration: none;
+      transition: color 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-btn-orders:hover { color: var(--silver-light); }
     .logo-object {
       display: inline-block;
       width: auto;
@@ -147,7 +225,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 40px 80px;
+      padding: 60px 40px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -826,19 +904,20 @@
     <div class="meteor meteor19"></div>
     <div class="meteor meteor20"></div>
   </div>
-    <a href="#" class="nav-logo">
-      <img src="roundlogo-1.png" alt="Silver Sketch Logo" class="logo-object logo-nav" style="vertical-align:middle; margin-right:10px;">
-      SILVER<span>SKETCH</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#shop">Prints</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
+<div style="height: 120px;"></div>  
+<div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#shop">Prints</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-divider"></div>
+      <div class="nav-actions">
+        <button class="nav-btn-orders" onclick="openMyOrders()">My Orders</button>
+        <button class="nav-btn-login" onclick="openLogin()" style="color:#ffffff;">Login / Sign Up</button>
+      </div>
+    </div>
+  </nav>  <!-- HERO -->
   <section class="hero">
     <img src="roundlogo-1.png" alt="Silver Sketch" class="logo-object logo-hero" style="margin-bottom:28px;">
     <p class="hero-tag">Hand Drawn Art — Self Taught — Tamil Nadu, India</p>
