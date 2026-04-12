@@ -924,7 +924,7 @@
     <h1>SILVER<br><span>SKETCH</span></h1>
     <p>Realistic pencil and ink artworks of machines, power, and raw detail. Every line drawn by hand.</p>
     <div class="hero-btns">
-      <a href="#gallery" class="btn-primary">View Gallery</a>
+      <button class="btn-primary" onclick="openGalleryModal()">View Gallery</button>
       <a href="#shop" class="btn-secondary">Buy Prints</a>
     </div>
   </section>
@@ -1016,6 +1016,33 @@
     </div>
     <div class="footer-copy">© 2025 Silver Sketch. All artworks hand drawn. All rights reserved.</div>
   </footer>
+
+  <!-- GALLERY MODAL -->
+  <div class="modal-overlay" id="galleryModal">
+    <div style="
+      width: 100%;
+      max-width: 1400px;
+      padding: 40px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    ">
+      <button class="modal-close" onclick="closeGalleryModal()" style="
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+        color: var(--silver-light);
+        font-size: 28px;
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        z-index: 3000;
+      ">✕</button>
+      <div class="gallery-grid" id="galleryModalGrid"></div>
+    </div>
+  </div>
 
   <!-- ORDER MODAL -->
   <div class="modal-overlay" id="orderModal">
@@ -1186,6 +1213,29 @@ async function loadArtworks() {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // ─── GALLERY MODAL ────────────────────────────────────────────
+    function openGalleryModal() {
+      const grid = document.getElementById('galleryModalGrid');
+      grid.innerHTML = '';
+      artworks.forEach(art => {
+        const card = document.createElement('div');
+        card.className = 'artwork-card';
+        card.innerHTML = `
+          <img src="${art.imagePath}" alt="${art.title}" onerror="this.style.display='none'; this.parentElement.style.background='#1a1a1a'"/>
+          <div class="artwork-overlay">
+            <div class="artwork-title">${art.title}</div>
+            <div class="artwork-medium">${art.medium}</div>
+            <button class="artwork-buy-btn" onclick="closeGalleryModal(); openOrderModal('${art.title}', 'A3', 500)">Buy Print</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      document.getElementById('galleryModal').classList.add('active');
+    }
+
+    function closeGalleryModal() {
+      document.getElementById('galleryModal').classList.remove('active');
+    }
 
     // ─── INIT ────────────────────────────────────────────────────────
     loadArtworks();
